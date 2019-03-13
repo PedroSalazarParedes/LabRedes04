@@ -3,7 +3,7 @@ import json
 
 
 def main():
-    host = '54.212.20.111'
+    host = '127.0.0.1'
     port = 5001
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as my_socket:
