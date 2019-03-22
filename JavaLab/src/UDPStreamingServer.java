@@ -6,18 +6,33 @@ import java.io.*;
 
 public class UDPStreamingServer {
 
-    public static final String UDP_ADDRESS = "localhost";
+    public static final String UDP_ADDRESS = "233.100.100.100";
 
-    private ServerSocket serverSocket;
-
-    private ArrayList<String> ports;
-    private ArrayList<DatagramSocket> sockets;
+    private int currentPort = 4500;
+    private ArrayList<Integer> ports;
+    private ArrayList<UDPStreamer> streamers;
 
 
     public UDPStreamingServer() {
+        streamers = new ArrayList<>();
+        ports = new ArrayList<>();
+    }
 
-        ports = new ArrayList<String>();
-        sockets = new ArrayList<DatagramSocket>();
+    //returns the port, the user will need it to join the multicast group
+    //returns 0 if an exception occurs
+    public int streamVideo(String fileAddress) {
+        try {
+            byte[] data = encodeVideo(new File(fileAddress));
+            UDPStreamer streamer = new UDPStreamer(new DatagramSocket(), data, currentPort);
+            streamers.add(streamer);
+            Thread t = new Thread(streamer);
+            t.start();
+            return currentPort++;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     //Base64 url and directory safe encoding
@@ -30,8 +45,6 @@ public class UDPStreamingServer {
         bytes = encoder.encode(bytes);
         return bytes;
     }
-
-//creo que tengo algo acá
 
     //base 64 encoding test
     public static void main(String[] args)
