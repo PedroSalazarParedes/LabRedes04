@@ -20,10 +20,12 @@ public class UDPStreamer implements Runnable {
         this.port = port;
     }
 
-    public boolean stop() {
+
+    //use this method to kill a streamer, returns the port number that was just released
+    public int stop() {
         on = false;
         socket.close();
-        return !on;
+        return port;
     }
 
 
@@ -53,7 +55,7 @@ public class UDPStreamer implements Runnable {
                 socket.send(pack);
             }
 
-            if (stopIndex < length) {
+            if (stopIndex < length && on) {
                 dest[destIndex] = Arrays.copyOfRange(data, stopIndex, length);
                 DatagramPacket pack = new DatagramPacket(dest[destIndex], dest[destIndex].length, InetAddress.getByName(UDPStreamingServer.UDP_ADDRESS), port);
                 socket.send(pack);

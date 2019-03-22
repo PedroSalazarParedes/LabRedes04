@@ -1,5 +1,4 @@
 import java.net.DatagramSocket;
-import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.io.*;
@@ -37,6 +36,12 @@ public class UDPStreamingServer {
         return 0;
     }
 
+    public void stopAll() {
+        for (UDPStreamer s: streamers) {
+            s.stop();
+        }
+    }
+
     //Base64 url and directory safe encoding
     public static byte[] encodeVideo(File file) throws IOException {
 
@@ -52,6 +57,9 @@ public class UDPStreamingServer {
     public static void main(String[] args) {
         UDPStreamingServer server = new UDPStreamingServer();
         server.streamVideo("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4");
+        server.streamVideo("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4");
+
+
     }
 
 }
