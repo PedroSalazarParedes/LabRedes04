@@ -1,8 +1,24 @@
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.io.*;
 
 public class UDPStreamingServer {
 
+    public static final String UDP_ADDRESS = "localhost";
+
+    private ServerSocket serverSocket;
+
+    private ArrayList<String> ports;
+    private ArrayList<DatagramSocket> sockets;
+
+
+    public UDPStreamingServer() {
+
+        ports = new ArrayList<String>();
+        sockets = new ArrayList<DatagramSocket>();
+    }
 
     //Base64 url and directory safe encoding
     public static byte[] encodeVideo(File file) throws IOException {
@@ -23,6 +39,7 @@ public class UDPStreamingServer {
         byte[] bytes = new byte[0];
         try {
             bytes = encodeVideo(new File("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4"));
+            System.out.println(bytes.length);
         } catch (IOException e) {
             e.printStackTrace();
         }
