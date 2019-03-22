@@ -42,7 +42,7 @@ public class UDPStreamer implements Runnable {
     public void run() {
         System.out.println("running...");
         final int length = data.length;
-        final byte[][] dest = new byte[(length + MAX_SIZE - 1) / MAX_SIZE][];
+        final byte[][] dest = new byte[(length + MAX_SIZE - 1) / MAX_SIZE][MAX_SIZE];
         int destIndex = 0;
         int stopIndex = 0;
         try {
