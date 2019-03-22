@@ -40,6 +40,7 @@ public class UDPStreamer implements Runnable {
      */
     @Override
     public void run() {
+        System.out.println("running...");
         final int length = data.length;
         final byte[][] dest = new byte[(length + MAX_SIZE - 1) / MAX_SIZE][];
         int destIndex = 0;

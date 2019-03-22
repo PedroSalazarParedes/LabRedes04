@@ -23,9 +23,11 @@ public class UDPStreamingServer {
     public int streamVideo(String fileAddress) {
         try {
             byte[] data = encodeVideo(new File(fileAddress));
+            System.out.println("successfully encoded file");
             UDPStreamer streamer = new UDPStreamer(new DatagramSocket(), data, currentPort);
             streamers.add(streamer);
             Thread t = new Thread(streamer);
+            System.out.println("Starting streamer");
             t.start();
             return currentPort++;
 
@@ -47,14 +49,9 @@ public class UDPStreamingServer {
     }
 
     //base 64 encoding test
-    public static void main(String[] args)
-    {
-        byte[] bytes = new byte[0];
-        try {
-            bytes = encodeVideo(new File("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4"));
-            System.out.println(bytes.length);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) {
+        UDPStreamingServer server = new UDPStreamingServer();
+        server.streamVideo("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4");
     }
+
 }
