@@ -1,3 +1,4 @@
+package infracom.server;
 import java.net.DatagramSocket;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -5,7 +6,7 @@ import java.io.*;
 
 public class UDPStreamingServer {
 
-    public static final String UDP_ADDRESS = "233.100.100.100";
+    public static final String UDP_ADDRESS = "127.0.0.1";
 
     private int currentPort = 4500;
     private ArrayList<Integer> ports;
@@ -44,7 +45,6 @@ public class UDPStreamingServer {
 
     //Base64 url and directory safe encoding
     public static byte[] encodeVideo(File file) throws IOException {
-
         Base64.Encoder encoder = Base64.getUrlEncoder();
         FileInputStream fis = new FileInputStream(file);
         byte[] bytes = new byte[(int)file.length()];
@@ -52,14 +52,4 @@ public class UDPStreamingServer {
         bytes = encoder.encode(bytes);
         return bytes;
     }
-
-    //base 64 encoding test
-    public static void main(String[] args) {
-        UDPStreamingServer server = new UDPStreamingServer();
-        server.streamVideo("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4");
-        server.streamVideo("/Users/pedrosalazar/Desktop/pruebas/Sample.mp4");
-
-
-    }
-
 }
