@@ -7,5 +7,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Desktop/vlcj-3.12.1" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Desktop/vlcj-3.12.1" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Desktop/vlcj-3.12.1" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Desktop/vlcj-3.12.1" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
